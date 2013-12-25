@@ -1,0 +1,8 @@
+ird/interface/irenderdevice.h
+ird/opengl2/gl2renderdevice.h
+ird/directx9/dx9renderdevice.h
+ird/opengl2/gl2renderdevice.cpp
+scenegraph/scenenode.h
+scenegraph/scenenode.cpp
+scenegraph/scenegraph.h
+scenegraph/scenegraph.cpp

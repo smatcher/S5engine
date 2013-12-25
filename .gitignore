@@ -1,0 +1,7 @@
+.sconsign.dblite
+*.swp
+*.pyc
+*.pro.user
+*.creator.user
+editor-bin*
+engine-bin*
