@@ -78,12 +78,35 @@ int SceneGraphModel::columnCount(const QModelIndex&) const
 
 QVariant SceneGraphModel::data(const QModelIndex& parent, int role) const
 {
-	if(role == Qt::DisplayRole)
+    if(role == Qt::DisplayRole || role == Qt::EditRole)
 	{
         S5::SceneNode* n = getNode(parent);
         if(n != 0) return QVariant(QString::fromStdString(n->name()));
 	}
 	return QVariant();
+}
+
+bool SceneGraphModel::setData(const QModelIndex & parent, const QVariant & value, int role)
+{
+    if(role == Qt::EditRole)
+    {
+        S5::SceneNode* n = getNode(parent);
+        if(n != 0)
+        {
+            n->setName(value.toString().toStdString());
+            return true;
+        }
+    }
+    return false;
+}
+
+Qt::ItemFlags SceneGraphModel::flags(const QModelIndex & index) const
+{
+    S5::SceneNode* n = getNode(index);
+    if(n!=0)
+        return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+
+    return QAbstractItemModel::flags(index);
 }
 
 /*

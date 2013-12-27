@@ -31,6 +31,11 @@ namespace S5
         return _p->name;
     }
 
+    void SceneNode::setName(const std::string& name)
+    {
+        _p->name = name;
+    }
+
     SceneNode* SceneNode::parent()
     {
         return _p->parent;

@@ -16,6 +16,7 @@ namespace S5
         ~SceneNode();
 
         std::string name();
+        void setName(const std::string& name);
         SceneNode* parent();
         SceneNodes children();
 
