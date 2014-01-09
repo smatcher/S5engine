@@ -31,7 +31,7 @@ CONFIG(release,debug|release) {
 	ENGINE_BIN = $$PWD/../engine-bin-release/
 }
 
-unix:!macx:!symbian: LIBS += -L$$ENGINE_BIN -lengine
+LIBS += -L$$ENGINE_BIN -lengine
 
 INCLUDEPATH += $$PWD/../engine-src
 DEPENDPATH += $$PWD/../engine-src

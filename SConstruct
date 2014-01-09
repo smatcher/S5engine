@@ -48,6 +48,7 @@ if env['PLATFORM'] == 'win32':
 else:
 	env.ParseConfig('pkg-config bullet --cflags --libs')
 
-env.ParseConfig('pkg-config uuid --cflags --libs')
+#env.ParseConfig('pkg-config uuid --cflags --libs')
 
 SConscript('SConscript_engine','env')
+
