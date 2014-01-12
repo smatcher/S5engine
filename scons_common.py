@@ -10,7 +10,9 @@ def createEnvironment(generate_help=False):
 	vars = Variables()
 	vars.AddVariables(BoolVariable('debug', 'Set 1 for debug build', 0))
 	env = Environment(variables = vars)
+	env['ENV']['PATH'] = os.environ['PATH']
 	env.Append(CCFLAGS=['-Wall'])
+	env.Append(CCFLAGS=['-std=c++11'])
 
 	if int(ARGUMENTS.get('debug', 0)):
 		env.Append(CCFLAGS=['-g'])

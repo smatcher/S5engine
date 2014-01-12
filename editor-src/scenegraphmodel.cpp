@@ -5,7 +5,7 @@
 
 #include <QEvent>
 
-SceneGraphModel::SceneGraphModel(QObject* parent, S5::SceneGraph* source_data) :
+SceneGraphModel::SceneGraphModel(QObject* parent, std::shared_ptr<S5::SceneGraph> source_data) :
     QAbstractItemModel(parent),
     source_data(source_data)
 {
@@ -13,7 +13,7 @@ SceneGraphModel::SceneGraphModel(QObject* parent, S5::SceneGraph* source_data) :
 
 S5::SceneNode* SceneGraphModel::getNode(const QModelIndex &index) const
 {
-    if (index.isValid() && index.internalPointer() != source_data)
+    if (index.isValid() && index.internalPointer() != source_data.get())
 	{
         S5::SceneNode *item = static_cast<S5::SceneNode*>(index.internalPointer());
 		if (item) return item;

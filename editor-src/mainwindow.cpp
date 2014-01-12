@@ -5,19 +5,23 @@
 #include "scenegraphviewer.h"
 #include "scenegraphmodel.h"
 
-#include "scenegraph/scenegraph.h"
-#include "scenegraph/scenenode.h"
+#include <engine/engine.h>
 
-MainWindow::MainWindow(QWidget *parent) :
+#include <scenegraph/scenegraph.h>
+#include <scenegraph/scenenode.h>
+
+MainWindow::MainWindow(S5::Engine* engine, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    engine(engine)
 {
     ui->setupUi(this);
 
     ui->centralWidget = new GLWidget(this);
     setCentralWidget(ui->centralWidget);
 
-    S5::SceneGraph* scenegraph = new S5::SceneGraph();
+    std::shared_ptr<S5::SceneGraph> scenegraph = engine->currentScene();
+
     S5::SceneNode* n1 = new S5::SceneNode("toto_n1");
     scenegraph->addRootNode(n1);
     S5::SceneNode* n2 = new S5::SceneNode("toto_n2");

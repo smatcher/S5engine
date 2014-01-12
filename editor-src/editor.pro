@@ -31,6 +31,8 @@ CONFIG(release,debug|release) {
 	ENGINE_BIN = $$PWD/../engine-bin-release/
 }
 
+CONFIG += c++11
+
 LIBS += -L$$ENGINE_BIN -lengine
 
 INCLUDEPATH += $$PWD/../engine-src

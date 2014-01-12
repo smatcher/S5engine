@@ -2,6 +2,7 @@
 #define SCENEGRAPHMODEL_H
 
 #include <QAbstractItemModel>
+#include <memory>
 
 namespace S5
 {
@@ -13,7 +14,7 @@ class SceneGraphModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    explicit SceneGraphModel(QObject* parent, S5::SceneGraph* source_data);
+    explicit SceneGraphModel(QObject* parent, std::shared_ptr<S5::SceneGraph> source_data);
  
 	QModelIndex index(int row, int column, const QModelIndex &parent) const;
 	QModelIndex parent(const QModelIndex&) const;
@@ -30,7 +31,7 @@ signals:
 public slots:
 
 private:
-    S5::SceneGraph* source_data;
+    std::shared_ptr<S5::SceneGraph> source_data;
 };
 
 #endif // SCENEGRAPHMODEL_H
