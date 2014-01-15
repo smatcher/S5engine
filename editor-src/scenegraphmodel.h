@@ -23,9 +23,18 @@ public:
 	QVariant data(const QModelIndex&, int role) const;
     bool setData(const QModelIndex & parent, const QVariant & value, int role);
     Qt::ItemFlags flags(const QModelIndex & index) const;
+    Qt::DropActions supportedDropActions() const;
 
     S5::SceneNode* getNode(const QModelIndex &index) const;
-   
+
+    QStringList mimeTypes() const;
+    QMimeData* mimeData(const QModelIndexList& indexes) const;
+    bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent);
+
+    bool insertRows(int row, int count, const QModelIndex & parent = QModelIndex());
+    bool removeRows(int row, int count, const QModelIndex & parent = QModelIndex());
+    bool moveRows(const QModelIndex & sourceParent, int sourceRow, int count, const QModelIndex & destinationParent, int destinationChild);
+
 signals:
     
 public slots:

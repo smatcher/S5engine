@@ -26,7 +26,7 @@ namespace S5
         delete _p;
     }
 
-    std::string SceneNode::name()
+    std::string SceneNode::name() const
     {
         return _p->name;
     }
@@ -36,12 +36,12 @@ namespace S5
         _p->name = name;
     }
 
-    SceneNode* SceneNode::parent()
+    SceneNode* SceneNode::parent() const
     {
         return _p->parent;
     }
 
-    SceneNodes SceneNode::children()
+    const SceneNodes& SceneNode::children() const
     {
         return _p->children;
     }
@@ -50,7 +50,7 @@ namespace S5
     {
         if (std::find(_p->children.begin(), _p->children.end(), child) == _p->children.end())
         {
-            if (child->parent() != NULL)
+            if (child->parent() != 0)
             {
                 child->parent()->removeChild(child);
             }
@@ -62,7 +62,9 @@ namespace S5
 
     void SceneNode::removeChild(SceneNode* child)
     {
-        child->_p->parent = NULL;
-        std::remove(_p->children.begin(), _p->children.end(), child);
+        child->_p->parent = 0;
+
+        SceneNodes& vec = _p->children;
+        vec.erase(std::remove(vec.begin(), vec.end(), child), vec.end());
     }
 }

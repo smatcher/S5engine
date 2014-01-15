@@ -20,6 +20,18 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QTreeView" name="treeView">
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::InternalMove</enum>
+      </property>
+      <property name="defaultDropAction">
+       <enum>Qt::MoveAction</enum>
+      </property>
       <attribute name="headerVisible">
        <bool>false</bool>
       </attribute>
@@ -27,6 +39,16 @@
     </item>
    </layout>
   </widget>
+  <action name="actionAdd_Node">
+   <property name="text">
+    <string>Add Node</string>
+   </property>
+  </action>
+  <action name="actionDelete_Node">
+   <property name="text">
+    <string>Delete Node</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

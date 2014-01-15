@@ -13,10 +13,11 @@ namespace S5
         SceneGraph();
         ~SceneGraph();
 
-        std::vector<SceneNode*> rootNodes();
+        const std::vector<SceneNode*>& rootNodes() const;
         void addRootNode(SceneNode* node);
         void removeRootNode(SceneNode* node);
 
+        void DEBUG_PRINT() const;
     private:
         struct Pimpl;
         Pimpl* _p;

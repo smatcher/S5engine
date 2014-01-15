@@ -16,6 +16,13 @@ public:
     explicit SceneGraphViewer(QWidget *parent, QAbstractItemModel* model);
     ~SceneGraphViewer();
     
+private slots:
+    void showContextMenu(const QPoint& pos);
+
+    void on_actionAdd_Node_triggered();
+
+    void on_actionDelete_Node_triggered();
+
 private:
     Ui::SceneGraphViewer *ui;
 };

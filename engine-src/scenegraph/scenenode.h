@@ -15,10 +15,11 @@ namespace S5
         SceneNode(std::string name, SceneNode* parent = NULL);
         ~SceneNode();
 
-        std::string name();
+        std::string name() const;
         void setName(const std::string& name);
-        SceneNode* parent();
-        SceneNodes children();
+
+        SceneNode* parent() const;
+        const SceneNodes& children() const;
 
         void addChild(SceneNode* child);
         void removeChild(SceneNode* child);
