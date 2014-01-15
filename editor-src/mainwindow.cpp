@@ -22,19 +22,20 @@ MainWindow::MainWindow(S5::Engine* engine, QWidget *parent) :
 
     std::shared_ptr<S5::SceneGraph> scenegraph = engine->currentScene();
 
-    S5::SceneNode* n1 = new S5::SceneNode("toto_n1");
-    scenegraph->addRootNode(n1);
-    S5::SceneNode* n2 = new S5::SceneNode("toto_n2");
-    scenegraph->addRootNode(n2);
-    S5::SceneNode* n2_1 = new S5::SceneNode("tata_n2_1");
-    n2->addChild(n2_1);
-    S5::SceneNode* n2_2 = new S5::SceneNode("tata_n2_2");
-    n2->addChild(n2_2);
-    S5::SceneNode* n2_3 = new S5::SceneNode("tata_n2_3");
-    n2->addChild(n2_3);
-    S5::SceneNode* n3 = new S5::SceneNode("toto_n3");
-    scenegraph->addRootNode(n3);
+    S5::SceneNodePtr root = scenegraph->rootNode();
+    S5::SceneNodePtr n1 = std::make_shared<S5::SceneNode>("toto_n1");
+    S5::SceneNodePtr n2 = std::make_shared<S5::SceneNode>("toto_n2");
+    S5::SceneNodePtr n2_1 = std::make_shared<S5::SceneNode>("tata_n2_1");
+    S5::SceneNodePtr n2_2 = std::make_shared<S5::SceneNode>("tata_n2_2");
+    S5::SceneNodePtr n2_3 = std::make_shared<S5::SceneNode>("tata_n2_3");
+    S5::SceneNodePtr n3 = std::make_shared<S5::SceneNode>("toto_n3");
 
+    S5::SceneNode::reparentNode(root, n1);
+    S5::SceneNode::reparentNode(root, n2);
+    S5::SceneNode::reparentNode(n2, n2_1);
+    S5::SceneNode::reparentNode(n2, n2_2);
+    S5::SceneNode::reparentNode(n2, n2_3);
+    S5::SceneNode::reparentNode(root, n3);
 
     SceneGraphModel* scenegraph_model = new SceneGraphModel(this, scenegraph);
     SceneGraphViewer* scenegraph_viewer = new SceneGraphViewer(this, scenegraph_model);

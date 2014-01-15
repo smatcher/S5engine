@@ -4,11 +4,8 @@
 #include <QAbstractItemModel>
 #include <memory>
 
-namespace S5
-{
-    class SceneNode;
-    class SceneGraph;
-}
+#include <scenegraph/scenegraph.h>
+#include <scenegraph/scenenode.h>
 
 class SceneGraphModel : public QAbstractItemModel
 {
@@ -25,7 +22,11 @@ public:
     Qt::ItemFlags flags(const QModelIndex & index) const;
     Qt::DropActions supportedDropActions() const;
 
-    S5::SceneNode* getNode(const QModelIndex &index) const;
+    S5::SceneNodePtr getNode(const QModelIndex &index) const;
+    S5::SceneNodePtr getNode(quintptr index) const;
+    bool findIndex(S5::SceneNodeWPtr node, quintptr& index) const;
+
+    QModelIndex customMakeIndex(int row, int column, S5::SceneNodeWPtr node) const;
 
     QStringList mimeTypes() const;
     QMimeData* mimeData(const QModelIndexList& indexes) const;
@@ -41,6 +42,8 @@ public slots:
 
 private:
     std::shared_ptr<S5::SceneGraph> source_data;
+    mutable std::map<quintptr, S5::SceneNodeWPtr> index_map;
+    mutable quintptr index_counter;
 };
 
 #endif // SCENEGRAPHMODEL_H

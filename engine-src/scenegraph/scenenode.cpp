@@ -8,23 +8,21 @@ namespace S5
     struct SceneNode::Pimpl
     {
         std::string name;
-        SceneNode* parent;
+        SceneNodeWPtr parent;
 
         SceneNodes children;
     };
 
-    SceneNode::SceneNode(std::string name, SceneNode* parent)
+    SceneNode::SceneNode(std::string name, SceneNodePtr parent)
     {
-        _p = new Pimpl();
+        _p = std::unique_ptr<Pimpl>(new Pimpl());
 
         _p->name = name;
         _p->parent = parent;
     }
 
     SceneNode::~SceneNode()
-    {
-        delete _p;
-    }
+    {}
 
     std::string SceneNode::name() const
     {
@@ -36,9 +34,9 @@ namespace S5
         _p->name = name;
     }
 
-    SceneNode* SceneNode::parent() const
+    SceneNodePtr SceneNode::parent() const
     {
-        return _p->parent;
+        return _p->parent.lock();
     }
 
     const SceneNodes& SceneNode::children() const
@@ -46,23 +44,24 @@ namespace S5
         return _p->children;
     }
 
-    void SceneNode::addChild(SceneNode* child)
+    void SceneNode::reparentNode(SceneNodePtr parent, SceneNodePtr child)
     {
-        if (std::find(_p->children.begin(), _p->children.end(), child) == _p->children.end())
+        SceneNodes& children = parent->_p->children;
+        if (std::find(children.begin(), children.end(), child) == children.end())
         {
             if (child->parent() != 0)
             {
                 child->parent()->removeChild(child);
             }
 
-            _p->children.push_back(child);
-            child->_p->parent = this;
+            children.push_back(child);
+            child->_p->parent = parent;
         }
     }
 
-    void SceneNode::removeChild(SceneNode* child)
+    void SceneNode::removeChild(SceneNodePtr child)
     {
-        child->_p->parent = 0;
+        child->_p->parent.reset();
 
         SceneNodes& vec = _p->children;
         vec.erase(std::remove(vec.begin(), vec.end(), child), vec.end());

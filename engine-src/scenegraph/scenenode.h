@@ -3,30 +3,35 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace S5
 {
     class SceneNode;
-    typedef std::vector<SceneNode*> SceneNodes;
+
+    typedef std::shared_ptr<SceneNode> SceneNodePtr;
+    typedef std::weak_ptr<SceneNode> SceneNodeWPtr;
+    typedef std::vector<SceneNodePtr> SceneNodes;
 
     class SceneNode
     {
     public:
-        SceneNode(std::string name, SceneNode* parent = NULL);
+        SceneNode(std::string name, SceneNodePtr parent = 0);
         ~SceneNode();
 
         std::string name() const;
         void setName(const std::string& name);
 
-        SceneNode* parent() const;
+        SceneNodePtr parent() const;
         const SceneNodes& children() const;
 
-        void addChild(SceneNode* child);
-        void removeChild(SceneNode* child);
+        void removeChild(SceneNodePtr child);
+
+        static void reparentNode(SceneNodePtr parent, SceneNodePtr child);
 
     private:
         struct Pimpl;
-        Pimpl* _p;
+        std::unique_ptr<Pimpl> _p;
     };
 }
 

@@ -2,10 +2,12 @@
 #define SCENEGRAPH_H
 
 #include <vector>
+#include <memory>
 
 namespace S5
 {
     class SceneNode;
+    typedef std::shared_ptr<SceneNode> SceneNodePtr;
 
     class SceneGraph
     {
@@ -13,14 +15,13 @@ namespace S5
         SceneGraph();
         ~SceneGraph();
 
-        const std::vector<SceneNode*>& rootNodes() const;
-        void addRootNode(SceneNode* node);
-        void removeRootNode(SceneNode* node);
+        SceneNodePtr rootNode();
+        const SceneNodePtr rootNode() const;
 
         void DEBUG_PRINT() const;
     private:
         struct Pimpl;
-        Pimpl* _p;
+        std::unique_ptr<Pimpl> _p;
     };
 }
 
