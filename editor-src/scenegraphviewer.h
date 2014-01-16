@@ -20,10 +20,12 @@ private slots:
     void showContextMenu(const QPoint& pos);
 
     void on_actionAdd_Node_triggered();
-
+    void on_actionAdd_Node_At_Root_triggered();
     void on_actionDelete_Node_triggered();
 
 private:
+    void addNodeAtIndex(QModelIndex index);
+
     Ui::SceneGraphViewer *ui;
 };
 

@@ -49,6 +49,11 @@
     <string>Delete Node</string>
    </property>
   </action>
+  <action name="actionAdd_Node_At_Root">
+   <property name="text">
+    <string>Add Node</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
