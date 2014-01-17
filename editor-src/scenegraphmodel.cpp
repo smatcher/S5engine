@@ -1,7 +1,6 @@
 #include "scenegraphmodel.h"
 
 #include <QEvent>
-#include <QDebug>
 #include <QStringList>
 #include <QMimeData>
 
@@ -133,7 +132,6 @@ QVariant SceneGraphModel::data(const QModelIndex& parent, int role) const
 
 bool SceneGraphModel::setData(const QModelIndex & parent, const QVariant & value, int role)
 {
-    qDebug() << "setData" << role << value;
     if(role == Qt::EditRole)
     {
         S5::SceneNodePtr node = getNode(parent);
@@ -169,18 +167,12 @@ QStringList SceneGraphModel::mimeTypes() const
 
 QMimeData* SceneGraphModel::mimeData(const QModelIndexList& indexes) const
 {
-    qDebug() << "mime encode";
-
     QMimeData *mimeData = new QMimeData();
     QByteArray encodedData;
 
     QDataStream stream(&encodedData, QIODevice::WriteOnly);
 
     foreach (const QModelIndex &model_index, indexes) {
-        /*
-        QPersistentModelIndex persistent_index = model_index;
-        stream << persistent_index;
-        */
         stream << model_index.row();
         stream << model_index.internalId();
     }
@@ -192,8 +184,6 @@ QMimeData* SceneGraphModel::mimeData(const QModelIndexList& indexes) const
 bool SceneGraphModel::dropMimeData(const QMimeData *data,
     Qt::DropAction action, int /*row*/, int column, const QModelIndex &destination_parent)
 {
-    qDebug() << "drop start" << action;
-
     if (action == Qt::IgnoreAction)
         return true;
 
@@ -214,12 +204,7 @@ bool SceneGraphModel::dropMimeData(const QMimeData *data,
         stream >> row;
         stream >> internal_id;
 
-        QModelIndex model_index = customMakeIndex(row, 0, getNode(internal_id));
-        /*
-        QPersistentModelIndex model_index;
-        stream >> model_index;
-        */
-
+        QModelIndex model_index = createIndex(row, 0, internal_id);
         QModelIndex source_parent = parent(model_index);
         int destination_row = parent_node->children().size();
         int source_row = model_index.row();
@@ -235,13 +220,16 @@ bool SceneGraphModel::moveRows(const QModelIndex & sourceParent, int sourceRow, 
     S5::SceneNodePtr source_parent = getNode(sourceParent);
     S5::SceneNodePtr destination_parent = getNode(destinationParent);
 
-    beginMoveRows(sourceParent, sourceRow, sourceRow+count+1, destinationParent, destinationChild);
-    qDebug() << "moveRows";
+    if (source_parent == destination_parent)
+        return false;
+
+    beginMoveRows(sourceParent, sourceRow, sourceRow+count-1, destinationParent, destinationChild);
     for (int i=0 ; i<count ; ++i)
     {
         S5::SceneNodePtr node = source_parent->children()[sourceRow];
         S5::SceneNode::reparentNode(destination_parent, node);
     }
+    source_data->DEBUG_PRINT();
     endMoveRows();
 
     return true;
@@ -249,7 +237,6 @@ bool SceneGraphModel::moveRows(const QModelIndex & sourceParent, int sourceRow, 
 
 bool SceneGraphModel::insertRows(int row, int count, const QModelIndex & parent)
 {
-    qDebug() << "insertRows";
     S5::SceneNodePtr parent_node = getNode(parent);
 
     beginInsertRows(parent, row, row+count-1);
@@ -265,7 +252,6 @@ bool SceneGraphModel::insertRows(int row, int count, const QModelIndex & parent)
 
 bool SceneGraphModel::removeRows(int row, int count, const QModelIndex & parent)
 {
-    qDebug() << "removeRows";
     S5::SceneNodePtr parent_node = getNode(parent);
 
     beginRemoveRows(parent, row, row+count-1);
