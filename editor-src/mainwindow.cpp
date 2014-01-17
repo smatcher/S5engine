@@ -37,9 +37,7 @@ MainWindow::MainWindow(S5::Engine* engine, QWidget *parent) :
     S5::SceneNode::reparentNode(n2, n2_3);
     S5::SceneNode::reparentNode(root, n3);
 
-    SceneGraphModel* scenegraph_model = new SceneGraphModel(this, scenegraph);
-    SceneGraphViewer* scenegraph_viewer = new SceneGraphViewer(this, scenegraph_model);
-    addDockWidget(Qt::LeftDockWidgetArea, scenegraph_viewer);
+    ui->sceneGraphViewer->sceneGraphChanged(scenegraph);
 }
 
 MainWindow::~MainWindow()

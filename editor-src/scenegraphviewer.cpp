@@ -1,16 +1,17 @@
 #include "scenegraphviewer.h"
 #include "ui_scenegraphviewer.h"
+#include "scenegraphmodel.h"
 
 #include <QMenu>
 #include <QDebug>
 
-SceneGraphViewer::SceneGraphViewer(QWidget *parent, QAbstractItemModel* model) :
-    QDockWidget(parent),
+SceneGraphViewer::SceneGraphViewer(QWidget *parent/*, QAbstractItemModel* model*/) :
+    QWidget(parent),
     ui(new Ui::SceneGraphViewer)
 {
     ui->setupUi(this);
 
-    ui->treeView->setModel(model);
+    //ui->treeView->setModel(model);
     ui->treeView->setContextMenuPolicy(Qt::CustomContextMenu);
 
     connect(ui->treeView, &QWidget::customContextMenuRequested, this, &SceneGraphViewer::showContextMenu);
@@ -21,8 +22,17 @@ SceneGraphViewer::~SceneGraphViewer()
     delete ui;
 }
 
+void SceneGraphViewer::sceneGraphChanged(std::shared_ptr<S5::SceneGraph> scenegraph)
+{
+    model.reset(new SceneGraphModel(nullptr, scenegraph));
+    ui->treeView->setModel(model.get());
+}
+
 void SceneGraphViewer::showContextMenu(const QPoint& pos)
 {
+    if (!model)
+        return;
+
     QModelIndex item = ui->treeView->indexAt(pos);
 
     QList<QAction*> actions;

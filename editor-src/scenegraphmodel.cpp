@@ -229,7 +229,7 @@ bool SceneGraphModel::moveRows(const QModelIndex & sourceParent, int sourceRow, 
         S5::SceneNodePtr node = source_parent->children()[sourceRow];
         S5::SceneNode::reparentNode(destination_parent, node);
     }
-    source_data->DEBUG_PRINT();
+    //source_data->DEBUG_PRINT();
     endMoveRows();
 
     return true;

@@ -14,15 +14,18 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     glwidget.cpp \
     scenegraphviewer.cpp \
-    scenegraphmodel.cpp
+    scenegraphmodel.cpp \
+    consolewidget.cpp
 
 HEADERS  += mainwindow.h \
     glwidget.h \
     scenegraphviewer.h \
-    scenegraphmodel.h
+    scenegraphmodel.h \
+    consolewidget.h
 
 FORMS    += mainwindow.ui \
-    scenegraphviewer.ui
+    scenegraphviewer.ui \
+    consolewidget.ui
 
 CONFIG(debug,debug|release) {
 	ENGINE_BIN = $$PWD/../engine-bin-debug/
