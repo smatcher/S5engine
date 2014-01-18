@@ -15,13 +15,17 @@ SOURCES += main.cpp\
     glwidget.cpp \
     scenegraphviewer.cpp \
     scenegraphmodel.cpp \
-    consolewidget.cpp
+    consolewidget.cpp \
+    qglrendercontextadapter.cpp \
+    qglrenderviewportadapter.cpp
 
 HEADERS  += mainwindow.h \
     glwidget.h \
     scenegraphviewer.h \
     scenegraphmodel.h \
-    consolewidget.h
+    consolewidget.h \
+    qglrendercontextadapter.h \
+    qglrenderviewportadapter.h
 
 FORMS    += mainwindow.ui \
     scenegraphviewer.ui \
@@ -41,4 +45,4 @@ LIBS += -L$$ENGINE_BIN -lengine
 INCLUDEPATH += $$PWD/../engine-src
 DEPENDPATH += $$PWD/../engine-src
 
-unix:!macx:!symbian: PRE_TARGETDEPS += $$ENGINE_BIN/libengine.a
+PRE_TARGETDEPS += $$ENGINE_BIN/libengine.a

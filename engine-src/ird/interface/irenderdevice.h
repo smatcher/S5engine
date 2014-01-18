@@ -5,7 +5,7 @@ namespace S5
 {
     namespace IRD
     {
-        class iRenderDevice;
+        class IRenderDevice;
 
         class Texture
         {
@@ -161,7 +161,7 @@ namespace S5
             bool relative;
         };
 
-        class iRenderDevice
+        class IRenderDevice
         {
         public:
 
@@ -171,7 +171,7 @@ namespace S5
             };
 
             //Global
-            virtual int init() = 0;
+            virtual void init() = 0;
             virtual bool isSupported(Feature feature) {return false;}
 
             //Textures

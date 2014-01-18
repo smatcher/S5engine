@@ -63,7 +63,7 @@ namespace S5
         };
 
         //Global
-        int GL2RenderDevice::init()
+        void GL2RenderDevice::init()
         {
             glewInit();
         }
@@ -81,6 +81,8 @@ namespace S5
         {
             glActiveTexture(GL_TEXTURE0 + texunit);
             glBindTexture(textureTypes[m_params.m_type], m_texture_id);
+
+            return true;
         }
 
         void GL2Texture::unbind(int texunit)

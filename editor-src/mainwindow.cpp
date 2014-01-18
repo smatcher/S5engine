@@ -4,6 +4,8 @@
 #include "glwidget.h"
 #include "scenegraphviewer.h"
 #include "scenegraphmodel.h"
+#include "qglrendercontextadapter.h"
+#include "qglrenderviewportadapter.h"
 
 #include <engine/engine.h>
 
@@ -16,9 +18,6 @@ MainWindow::MainWindow(S5::Engine* engine, QWidget *parent) :
     engine(engine)
 {
     ui->setupUi(this);
-
-    ui->centralWidget = new GLWidget(this);
-    setCentralWidget(ui->centralWidget);
 
     std::shared_ptr<S5::SceneGraph> scenegraph = engine->currentScene();
 
@@ -38,6 +37,10 @@ MainWindow::MainWindow(S5::Engine* engine, QWidget *parent) :
     S5::SceneNode::reparentNode(root, n3);
 
     ui->sceneGraphViewer->sceneGraphChanged(scenegraph);
+
+    render_context = std::shared_ptr<S5::IRenderContext>(new QGlRenderContextAdapter(ui->renderViewport->context()));
+    render_viewport = std::shared_ptr<S5::IRenderViewport>(new QGlRenderViewportAdapter(ui->renderViewport));
+    engine->setupRenderer(render_context, render_viewport);
 }
 
 MainWindow::~MainWindow()

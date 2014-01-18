@@ -31,3 +31,5 @@ maths/boundingsphere.cpp
 maths/aabb.cpp
 engine/engine.h
 engine/engine.cpp
+abstraction/irendercontext.h
+abstraction/irenderviewport.h

@@ -22,5 +22,5 @@ all_h_list	= getHeadersListFromFile(PROJECT_DIR+'/engine.files')
 # Create the object files
 obj_list   = engineEnv.Object(all_src_list)
 
-lib = engineEnv.StaticLibrary(BUILD_DIR + '/' + LIB_NAME,obj_list)
+lib = engineEnv.SharedLibrary(BUILD_DIR + '/' + LIB_NAME,obj_list)
 

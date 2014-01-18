@@ -68,11 +68,11 @@ namespace S5
             GLuint m_framebuffer_id;
         };
 
-        class GL2RenderDevice : public iRenderDevice
+        class GL2RenderDevice : public IRenderDevice
         {
         public:
             //Global
-            virtual int init();
+            virtual void init();
             virtual bool isSupported(Feature feature);
 
             //Textures

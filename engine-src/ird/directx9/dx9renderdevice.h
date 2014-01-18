@@ -7,7 +7,7 @@ namespace S5
 {
     namespace IRD
     {
-        class DX9RenderDevice : public iRenderDevice
+        class DX9RenderDevice : public IRenderDevice
         {
         public:
                 virtual bool isSupported(Feature feature) {return false;}

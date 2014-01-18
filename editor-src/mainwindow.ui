@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>S5 Editor</string>
   </property>
-  <widget class="QWidget" name="centralWidget"/>
+  <widget class="GLWidget" name="renderViewport"/>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
@@ -69,6 +69,12 @@
    <class>SceneGraphViewer</class>
    <extends>QWidget</extends>
    <header>scenegraphviewer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>GLWidget</class>
+   <extends>QWidget</extends>
+   <header>glwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
