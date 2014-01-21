@@ -45,4 +45,9 @@ LIBS += -L$$ENGINE_BIN -lengine
 INCLUDEPATH += $$PWD/../engine-src
 DEPENDPATH += $$PWD/../engine-src
 
-PRE_TARGETDEPS += $$ENGINE_BIN/libengine.a
+win32 {
+    PRE_TARGETDEPS += $$ENGINE_BIN/libengine.a
+}
+!win32 {
+    PRE_TARGETDEPS += $$ENGINE_BIN/libengine.so
+}
