@@ -6,6 +6,7 @@
 #include "scenegraphmodel.h"
 #include "qglrendercontextadapter.h"
 #include "qglrenderviewportadapter.h"
+#include "qtimer.h"
 
 #include <engine/engine.h>
 
@@ -41,6 +42,12 @@ MainWindow::MainWindow(S5::Engine* engine, QWidget *parent) :
     render_context = std::shared_ptr<S5::IRenderContext>(new QGlRenderContextAdapter(ui->renderViewport->context()));
     render_viewport = std::shared_ptr<S5::IRenderViewport>(new QGlRenderViewportAdapter(ui->renderViewport));
     engine->setupRenderer(render_context, render_viewport);
+
+    ui->renderViewport->setEngine(engine);
+
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), ui->renderViewport, SLOT(updateGL()));
+    timer->start(20);
 }
 
 MainWindow::~MainWindow()

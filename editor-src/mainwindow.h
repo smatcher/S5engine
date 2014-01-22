@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(S5::Engine* engine, QWidget *parent = 0);
     ~MainWindow();
-    
+
 private:
     Ui::MainWindow *ui;
     S5::Engine* engine;

@@ -7,6 +7,8 @@
 
 #include <assert.h>
 
+#include <GL/gl.h>
+
 namespace S5
 {
     struct Engine::Pimpl
@@ -57,7 +59,29 @@ namespace S5
 
     void Engine::renderStuff()
     {
+        static int progress = 0;
+        progress = (progress + 30) % 1000;
+
         assert(isReadyToRender());
+
+        float red = float(progress%1000) / 1000.0f;
+        float green = float((progress+333)%1000) / 1000.0f;
+        float blue = float((progress+666)%1000) / 1000.0f;
+
+        glClearColor(0.0, 0.0, 0.0, 0.0);
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glBegin(GL_TRIANGLES);
+            glColor3f(red, 0.0, 0.0);
+            glVertex3f(0.25, 0.75, 0.0);
+            glColor3f(0.0, green, 0.0);
+            glVertex3f(0.5, 0.25, 0.0);
+            glColor3f(0.0, 0.0, blue);
+            glVertex3f(0.75, 0.75, 0.0);
+        glEnd();
+        glFlush();
     }
 
 }
