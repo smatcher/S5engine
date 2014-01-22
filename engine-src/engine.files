@@ -33,3 +33,7 @@ engine/engine.h
 engine/engine.cpp
 abstraction/irendercontext.h
 abstraction/irenderviewport.h
+components/icomponent.h
+components/icomponent.cpp
+scenegraph/forwards.h
+components/forwards.h

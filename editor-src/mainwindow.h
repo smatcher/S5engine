@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
     
 public:
-    explicit MainWindow(S5::Engine* engine, QWidget *parent = 0);
+    explicit MainWindow(S5::Engine* engine, QWidget *parent = nullptr);
     ~MainWindow();
 
 private:

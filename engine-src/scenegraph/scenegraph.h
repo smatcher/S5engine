@@ -1,14 +1,10 @@
 #ifndef SCENEGRAPH_H
 #define SCENEGRAPH_H
 
-#include <vector>
-#include <memory>
+#include <scenegraph/forwards.h>
 
 namespace S5
 {
-    class SceneNode;
-    typedef std::shared_ptr<SceneNode> SceneNodePtr;
-
     class SceneGraph
     {
     public:

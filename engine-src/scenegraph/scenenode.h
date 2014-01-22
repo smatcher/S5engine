@@ -2,32 +2,30 @@
 #define SCENENODE_H
 
 #include <string>
-#include <vector>
-#include <memory>
+
+#include <scenegraph/forwards.h>
+#include <components/forwards.h>
 
 namespace S5
 {
-    class SceneNode;
-
-    typedef std::shared_ptr<SceneNode> SceneNodePtr;
-    typedef std::weak_ptr<SceneNode> SceneNodeWPtr;
-    typedef std::vector<SceneNodePtr> SceneNodes;
-
     class SceneNode
     {
     public:
-        SceneNode(std::string name, SceneNodePtr parent = 0);
+        SceneNode(std::string name, SceneNodePtr parent = nullptr);
         ~SceneNode();
 
         std::string name() const;
         void setName(const std::string& name);
 
         SceneNodePtr parent() const;
-        const SceneNodes& children() const;
+        const SceneNodeSet& children() const;
 
         void removeChild(SceneNodePtr child);
 
         static void reparentNode(SceneNodePtr parent, SceneNodePtr child);
+
+        void addComponent(ComponentPtr component);
+        const ComponentSet& components() const;
 
     private:
         struct Pimpl;

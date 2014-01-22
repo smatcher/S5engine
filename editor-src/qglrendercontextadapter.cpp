@@ -8,7 +8,7 @@ QGlRenderContextAdapter::QGlRenderContextAdapter(QGLContext* context)
     : S5::IRenderContext()
     , _context(context)
 {
-    assert(_context != 0);
+    assert(_context != nullptr);
 }
 
 QGlRenderContextAdapter::~QGlRenderContextAdapter()

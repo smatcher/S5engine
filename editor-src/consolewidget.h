@@ -12,7 +12,7 @@ class ConsoleWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit ConsoleWidget(QWidget *parent = 0);
+    explicit ConsoleWidget(QWidget *parent = nullptr);
     ~ConsoleWidget();
 
 private:

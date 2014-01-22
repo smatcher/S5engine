@@ -41,7 +41,7 @@ struct MatchSceneNode
     {
         S5::SceneNode* ptr1 = node.lock().get();
         S5::SceneNode* ptr2 = other.lock().get();
-        return ptr1 != 0 && ptr1 == ptr2;
+        return ptr1 != nullptr && ptr1 == ptr2;
     }
 
     bool operator()(std::pair<quintptr, S5::SceneNodeWPtr> other)
@@ -100,7 +100,7 @@ QModelIndex SceneGraphModel::parent(const QModelIndex& index) const
     quintptr parent_index;
     if (findIndex(parentItem, parent_index))
     {
-        const S5::SceneNodes& parent_siblings = parentItem->parent()->children();
+        const S5::SceneNodeSet& parent_siblings = parentItem->parent()->children();
         auto it = std::find_if(parent_siblings.begin(), parent_siblings.end(), MatchSceneNode(parentItem));
         int parent_row = it - parent_siblings.begin();
         return createIndex(parent_row, 0, parent_index);

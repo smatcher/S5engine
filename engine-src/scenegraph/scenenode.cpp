@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+#include <components/icomponent.h>
+
 namespace S5
 {
 
@@ -10,7 +12,8 @@ namespace S5
         std::string name;
         SceneNodeWPtr parent;
 
-        SceneNodes children;
+        SceneNodeSet children;
+        ComponentSet components;
     };
 
     SceneNode::SceneNode(std::string name, SceneNodePtr parent)
@@ -39,17 +42,17 @@ namespace S5
         return _p->parent.lock();
     }
 
-    const SceneNodes& SceneNode::children() const
+    const SceneNodeSet& SceneNode::children() const
     {
         return _p->children;
     }
 
     void SceneNode::reparentNode(SceneNodePtr parent, SceneNodePtr child)
     {
-        SceneNodes& children = parent->_p->children;
+        SceneNodeSet& children = parent->_p->children;
         if (std::find(children.begin(), children.end(), child) == children.end())
         {
-            if (child->parent() != 0)
+            if (child->parent() != nullptr)
             {
                 child->parent()->removeChild(child);
             }
@@ -63,7 +66,7 @@ namespace S5
     {
         child->_p->parent.reset();
 
-        SceneNodes& vec = _p->children;
+        SceneNodeSet& vec = _p->children;
         vec.erase(std::remove(vec.begin(), vec.end(), child), vec.end());
     }
 }
