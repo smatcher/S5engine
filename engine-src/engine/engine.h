@@ -26,7 +26,7 @@ namespace S5
 
     private:
         struct Pimpl;
-        Pimpl* _p;
+        std::unique_ptr<Pimpl> _p;
     };
 }
 

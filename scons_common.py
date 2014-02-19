@@ -15,7 +15,7 @@ def createEnvironment(generate_help=False):
 	env.Append(CCFLAGS=['-std=c++11'])
 
 	if env['PLATFORM'] != 'win32':
-		#env['STATIC_AND_SHARED_OBJECTS_ARE_THE_SAME']=1
+		env['STATIC_AND_SHARED_OBJECTS_ARE_THE_SAME']=1
 		env.Append(CCFLAGS=['-fPIC'])
 
 	if int(ARGUMENTS.get('debug', 0)):

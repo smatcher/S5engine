@@ -22,13 +22,11 @@ namespace S5
 
     Engine::Engine()
     {
-        _p = new Pimpl();
+        _p = std::unique_ptr<Pimpl>(new Pimpl());
     }
 
     Engine::~Engine()
-    {
-        delete _p;
-    }
+    {}
 
     void Engine::init()
     {

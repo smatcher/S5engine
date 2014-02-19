@@ -37,3 +37,6 @@ components/icomponent.h
 components/icomponent.cpp
 scenegraph/forwards.h
 components/forwards.h
+objectmodel/objectmodel.h
+objectmodel/objectmodel.cpp
+objectmodel/variant.h
