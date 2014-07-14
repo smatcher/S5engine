@@ -13,10 +13,11 @@
 #include <scenegraph/scenegraph.h>
 #include <scenegraph/scenenode.h>
 
-MainWindow::MainWindow(S5::Engine* engine, QWidget *parent) :
+MainWindow::MainWindow(S5::Engine* engine, S5::IScriptInterpreter* script_interpreter, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    engine(engine)
+    engine(engine),
+    script_interpreter(script_interpreter)
 {
     ui->setupUi(this);
 
@@ -44,6 +45,7 @@ MainWindow::MainWindow(S5::Engine* engine, QWidget *parent) :
     engine->setupRenderer(render_context, render_viewport);
 
     ui->renderViewport->setEngine(engine);
+    ui->console->setScriptInterpreter(script_interpreter);
 
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), ui->renderViewport, SLOT(updateGL()));

@@ -40,6 +40,7 @@ CONFIG(release,debug|release) {
 
 CONFIG += c++11
 
+LIBS += -llua -ldl
 LIBS += -L$$ENGINE_BIN -lengine
 
 INCLUDEPATH += $$PWD/../engine-src

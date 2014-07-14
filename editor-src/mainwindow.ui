@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>1293</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -52,7 +52,7 @@
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
-   <widget class="ConsoleWidget" name="console_2"/>
+   <widget class="ConsoleWidget" name="console"/>
   </widget>
   <zorder>sceneGraphViewerDock</zorder>
   <zorder>consoleDock</zorder>

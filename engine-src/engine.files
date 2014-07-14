@@ -40,3 +40,6 @@ components/forwards.h
 objectmodel/objectmodel.h
 objectmodel/objectmodel.cpp
 objectmodel/variant.h
+abstraction/iscriptinterpreter.h
+lua/luainterpreter.h
+lua/luainterpreter.cpp
