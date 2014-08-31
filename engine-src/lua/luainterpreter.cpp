@@ -41,8 +41,13 @@ namespace S5
         }
    }
 
-   void LuaInterpreter::eval(const std::string &command)
+   void LuaInterpreter::doString(const std::string &command)
    {
        luaL_dostring(_p->lua_state, command.c_str());
+   }
+
+   void LuaInterpreter::doFile(const std::string &filepath)
+   {
+       luaL_dofile(_p->lua_state, filepath.c_str());
    }
 }

@@ -12,7 +12,8 @@ namespace S5
         virtual ~IScriptInterpreter() {}
 
         virtual void init() = 0;
-        virtual void eval(const std::string& command) = 0;
+        virtual void doString(const std::string& command) = 0;
+        virtual void doFile(const std::string& filepath) = 0;
     };
 }
 
