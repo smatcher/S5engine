@@ -6,6 +6,30 @@
 
 namespace S5
 {
+    static int l_my_print(lua_State* L)
+    {
+        int nargs = lua_gettop(L);
+
+        for (int i=1; i <= nargs; i++)
+        {
+            if (lua_isstring(L, i))
+            {
+                /* Pop the next arg using lua_tostring(L, i) and do your print */
+            }
+            else
+            {
+                /* Do something with non-strings if you like */
+            }
+        }
+
+        return 0;
+    }
+
+    static const struct luaL_Reg printlib [] = {
+      {"print", l_my_print},
+      {NULL, NULL} /* end of array */
+    };
+
     struct LuaInterpreter::Pimpl
     {
        lua_State* lua_state;
@@ -39,6 +63,13 @@ namespace S5
             lib->func(_p->lua_state);
             lua_settop(_p->lua_state, 0);
         }
+
+        /* uncomment to register print */
+        /*
+        lua_getglobal(_p->lua_state, "_G");
+        luaL_register(_p->lua_state, NULL, printlib);
+        lua_pop(_p->lua_state, 1);
+        */
    }
 
    void LuaInterpreter::doString(const std::string &command)
