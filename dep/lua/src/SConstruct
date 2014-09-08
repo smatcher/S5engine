@@ -1,0 +1,82 @@
+# SConstruct - root SCons script for SuperSpaceShipsShootingStuff
+
+import os
+env = Environment(ENV = {'PATH' : os.environ['PATH']})
+
+all_src_list = [
+'lapi.c',
+'lauxlib.c',
+'lbaselib.c',
+'lbitlib.c',
+'lcode.c',
+'lcorolib.c',
+'lctype.c',
+'ldblib.c',
+'ldebug.c',
+'ldo.c',
+'ldump.c',
+'lfunc.c',
+'lgc.c',
+'linit.c',
+'liolib.c',
+'llex.c',
+'lmathlib.c',
+'lmem.c',
+'loadlib.c',
+'lobject.c',
+'lopcodes.c',
+'loslib.c',
+'lparser.c',
+'lstate.c',
+'lstring.c',
+'lstrlib.c',
+'ltable.c',
+'ltablib.c',
+'ltm.c',
+'lua.c',
+'luac.c',
+'lundump.c',
+'lvm.c',
+'lzio.c',
+]
+
+base_src_list = [
+'lapi.c',
+'lcode.c',
+'lctype.c',
+'ldebug.c',
+'ldo.c',
+'ldump.c',
+'lfunc.c',
+'lgc.c',
+'llex.c',
+'lmem.c',
+'lobject.c',
+'lopcodes.c',
+'lparser.c',
+'lstate.c',
+'lstring.c',
+'ltable.c',
+'ltm.c',
+'lundump.c',
+'lvm.c',
+'lzio.c',
+]
+
+lib_src_list = [
+'lauxlib.c',
+'lbaselib.c',
+'lbitlib.c',
+'lcorolib.c',
+'ldblib.c',
+'liolib.c',
+'lmathlib.c',
+'loslib.c',
+'lstrlib.c',
+'ltablib.c',
+'loadlib.c',
+'linit.c',
+]
+
+obj_list = env.Object(base_src_list + lib_src_list)
+env.SharedLibrary('lua', obj_list)

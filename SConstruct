@@ -31,7 +31,10 @@ else:
 	env.Append(LIBS=['-lopenal','-lalut'])
 # lua
 if env['PLATFORM'] == 'win32':
-	env.Append(LIBS=['-llua-5.2','-ldl'])
+	env.Append(CPPPATH=['dep/lua/src'])
+	env.Append(LIBPATH=['dep/lua/lib-win32'])
+	env.Append(LIBS=['-llua'])
+	#env.Append(LIBS=['-llua-5.2','-ldl'])
 else:
 	env.ParseConfig('pkg-config lua --cflags --libs')
 # assimp

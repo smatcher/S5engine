@@ -40,7 +40,12 @@ CONFIG(release,debug|release) {
 
 CONFIG += c++11
 
+win32 {
+LIBS += -L$$PWD/../dep/lua/lib-win32 -llua
+}
+!win32 {
 LIBS += -llua -ldl
+}
 LIBS += -L$$ENGINE_BIN -lengine
 
 INCLUDEPATH += $$PWD/../engine-src
