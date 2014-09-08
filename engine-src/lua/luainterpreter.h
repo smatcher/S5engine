@@ -14,7 +14,8 @@ namespace S5
         virtual ~LuaInterpreter();
 
         virtual void init();
-        virtual void eval(const std::string &command);
+        virtual void doString(const std::string &command);
+        virtual void doFile(const std::string &filepath);
 
     private:
         struct Pimpl;

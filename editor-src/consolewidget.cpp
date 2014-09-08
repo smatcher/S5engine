@@ -29,7 +29,7 @@ void ConsoleWidget::_processInput()
   ui->consoleInput->clear();
 
   if (_script_interpreter != nullptr)
-     _script_interpreter->eval(input.toStdString());
+     _script_interpreter->doString(input.toStdString());
 
   int insert_where = _output_model->rowCount();
   _output_model->insertRow(insert_where);
